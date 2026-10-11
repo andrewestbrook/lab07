@@ -21,6 +21,7 @@ fn main() {
     println!();
     println!("Average: {:.2}", average_temp(&highs));
     println!("Hottest day: {}", DAYS[hottest_day(&highs)]);
+    println!("Days above 75: {}", count_above(&highs, 75));
 }
 
 fn average_temp(log: &Vec<i32>) -> f64 {
@@ -47,4 +48,14 @@ fn hottest_day(log: &Vec<i32>) -> usize {
         }
     }
     index
+}
+
+fn count_above(log: &Vec<i32>, threshold: i32) -> usize {
+    let mut count = 0;
+    for entry in log {
+        if *entry > threshold {
+            count += 1;
+        }
+    }
+    count
 }
