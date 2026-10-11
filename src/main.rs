@@ -20,6 +20,7 @@ fn main() {
 
     println!();
     println!("Average: {:.2}", average_temp(&highs));
+    println!("Hottest day: {}", DAYS[hottest_day(&highs)]);
 }
 
 fn average_temp(log: &Vec<i32>) -> f64 {
@@ -31,4 +32,19 @@ fn average_temp(log: &Vec<i32>) -> f64 {
         total += *entry as f64;
     }
     total / log.len() as f64
+}
+
+fn hottest_day(log: &Vec<i32>) -> usize {
+    if log.is_empty() {
+        return 0;
+    }
+    let mut highest = log[0];
+    let mut index = 0;
+    for (i, entry) in log.iter().enumerate() {
+        if *entry > highest {
+            highest = *entry;
+            index = i;
+        }
+    }
+    index
 }
