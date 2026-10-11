@@ -17,4 +17,18 @@ fn main() {
     for (i, high) in highs.iter().enumerate() {
         println!("{}: {}", DAYS[i], high);
     }
+
+    println!();
+    println!("Average: {:.2}", average_temp(&highs));
+}
+
+fn average_temp(log: &Vec<i32>) -> f64 {
+    if log.is_empty() {
+        return 0.0;
+    }
+    let mut total: f64 = 0.0;
+    for entry in log {
+        total += *entry as f64;
+    }
+    total / log.len() as f64
 }
