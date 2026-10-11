@@ -42,9 +42,10 @@ fn main() {
     }
 
     println!();
-    println!("Average: {:.2}", average_temp(&log));
-    println!("Hottest day: {}", log[hottest_day(&log)].day);
-    println!("Days above 75: {}", count_above(&log, 75));
+    let summary = summarize(&log, 75);
+    println!("Average: {:.2}", summary.average);
+    println!("Hottest day: {}", summary.hottest_day);
+    println!("Days above 75: {}", summary.days_above);
 }
 
 fn average_temp(log: &Vec<Reading>) -> f64 {
@@ -81,4 +82,12 @@ fn count_above(log: &Vec<Reading>, threshold: i32) -> usize {
         }
     }
     count
+}
+
+fn summarize(log: &Vec<Reading>, threshold: i32) -> Summary {
+    Summary {
+        average: average_temp(log),
+        hottest_day: log[hottest_day(log)].day.clone(),
+        days_above: count_above(log, threshold),
+    }
 }
