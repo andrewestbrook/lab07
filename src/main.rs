@@ -44,18 +44,18 @@ fn main() {
     }
 
     println!();
-    println!("Average: {:.2}", average_temp(&highs));
+    println!("Average: {:.2}", average_temp(&log));
     println!("Hottest day: {}", DAYS[hottest_day(&highs)]);
     println!("Days above 75: {}", count_above(&highs, 75));
 }
 
-fn average_temp(log: &Vec<i32>) -> f64 {
+fn average_temp(log: &Vec<Reading>) -> f64 {
     if log.is_empty() {
         return 0.0;
     }
     let mut total: f64 = 0.0;
     for entry in log {
-        total += *entry as f64;
+        total += entry.high as f64;
     }
     total / log.len() as f64
 }
