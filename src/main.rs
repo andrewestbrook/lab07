@@ -14,10 +14,8 @@ struct Summary {
 }
 
 fn main() {
-    let mut highs: Vec<i32> = vec![72, 68, 75, 81, 79];
-
     let mut log: Vec<Reading> = Vec::new();
-    for (i, high) in highs.iter().enumerate() {
+    for (i, high) in [72, 68, 75, 81, 79].iter().enumerate() {
         log.push(Reading {
             day: DAYS[i].to_string(),
             high: *high,
@@ -29,14 +27,14 @@ fn main() {
     }
 
     let mut rng = rand::rng();
-    highs.push(rng.random_range(60..=100));
-    highs.push(rng.random_range(60..=100));
-    for i in log.len()..highs.len() {
-        log.push(Reading {
-            day: DAYS[i].to_string(),
-            high: highs[i],
-        });
-    }
+    log.push(Reading {
+        day: DAYS[log.len()].to_string(),
+        high: rng.random_range(60..=100),
+    });
+    log.push(Reading {
+        day: DAYS[log.len()].to_string(),
+        high: rng.random_range(60..=100),
+    });
 
     println!();
     for reading in &log {
